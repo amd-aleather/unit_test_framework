@@ -1,0 +1,34 @@
+# Copyright (C) 2024 Advanced Micro Devices, Inc. All rights reserved.
+#
+# @file  CcxEnableSmeeUt.inf
+# @brief
+#
+
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = CcxEnableSmeeUt
+  FILE_GUID      = 4DC9CEEC-9AF5-4983-E104-D9A1F85C06F6
+  MODULE_TYPE    = HOST_APPLICATION
+  VERSION_STRING = 1.0
+
+[BuildOptions]
+# Set the compiler to include the platform openSIL config file
+  MSFT:*_*_*_CC_FLAGS     =  /FI openSIL/configs/Onyx_SilCfg.h /Dstatic=
+  GCC:*_*_*_CC_FLAGS      =  -include openSIL/configs/Onyx_SilCfg.h -Dstatic=
+
+[Sources]
+  CcxEnableSmeeUt.c
+  CcxEnableSmeeUt.h
+  ../../../../../../../../AmdOpenSilPkg/opensil-uefi-interface/OpenSIL/xUSL/CCX/Common/CcxMiscInit.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  UnitTestFrameworkPkg/UnitTestFrameworkPkg.dec
+  AmdCommonPkg/Test/UnitTest/AgesaModuleUtPkg.dec
+  AmdOpenSilPkg/opensil-uefi-interface/UnitTest/AmdOpenSilUtPkg.dec
+  AmdOpenSilPkg/opensil-uefi-interface/AmdOpenSilPkg.dec
+
+[LibraryClasses]
+  UtBaseLib
+  UtCpuOpsStubLib
+  UtSilServicesMockLib
